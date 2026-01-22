@@ -1,8 +1,8 @@
 {
   "name": "healthy-habits",
-  "productName": "healthy-habits",
+  "productName": "Healthy Habits",
   "version": "1.0.0",
-  "description": "My Electron application description",
+  "description": "Healthy habit reminder app for those of us with office jobs!",
   "main": ".vite/build/main.js",
   "private": true,
   "scripts": {

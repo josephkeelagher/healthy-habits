@@ -1,33 +1,36 @@
-/**
- * This file will automatically be loaded by vite and run in the "renderer" context.
- * To learn more about the differences between the "main" and the "renderer" context in
- * Electron, visit:
- *
- * https://electronjs.org/docs/tutorial/process-model
- *
- * By default, Node.js integration in this file is disabled. When enabling Node.js integration
- * in a renderer process, please be aware of potential security implications. You can read
- * more about security risks here:
- *
- * https://electronjs.org/docs/tutorial/security
- *
- * To enable Node.js integration in this file, open up `main.ts` and enable the `nodeIntegration`
- * flag:
- *
- * ```
- *  // Create the browser window.
- *  mainWindow = new BrowserWindow({
- *    width: 800,
- *    height: 600,
- *    webPreferences: {
- *      nodeIntegration: true
- *    }
- *  });
- * ```
- */
+// 1. Define the data (Must match the keys in main.ts)
+const REMINDERS = {
+  water: {
+    title: 'Drink break!',
+    body: 'Have a sip of water.',
+    color: '#3498db'
+  },
+  eyes: {
+    title: 'Look away!',
+    body: 'Look at something 20 feet away for roughly 20 seconds.',
+    color: '#2ecc71'
+  },
+  stand: {
+    title: 'Stand up!',
+    body: 'Use your legs for at least 8-10 minutes.',
+    color: '#e74c3c'
+  }
+};
 
-import './index.css';
+// Get reminder type from query param
+const params = new URLSearchParams(window.location.search);
+const type = params.get('type') as keyof typeof REMINDERS || 'water';
 
-console.log(
-  '👋 This message is being logged by "renderer.ts", included via Vite',
-);
+// 3. Update the UI
+const data = REMINDERS[type];
+
+const titleEl = document.getElementById('title');
+const msgEl = document.getElementById('message');
+
+if (titleEl && msgEl) {
+  titleEl.innerText = data.title;
+  titleEl.style.color = data.color;
+  msgEl.innerText = data.body;
+}
+
+console.log(`Rendered reminder: ${type}`);
