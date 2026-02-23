@@ -1,25 +1,20 @@
 // 1. Define the data (Must match the keys in main.ts)
 const REMINDERS = {
-  water: {
-    title: 'Drink break!',
-    body: 'Have a sip of water.',
-    color: '#3498db'
-  },
   eyes: {
     title: 'Look away!',
     body: 'Look at something 20 feet away for roughly 20 seconds.',
     color: '#2ecc71'
   },
-  stand: {
+  standing: {
     title: 'Stand up!',
-    body: 'Use your legs for at least 8-10 minutes.',
-    color: '#e74c3c'
+    body: 'Walk or stand for at least 8-10 minutes.',
+    color: '#3c5ee7'
   }
 };
 
 // Get reminder type from query param
 const params = new URLSearchParams(window.location.search);
-const type = params.get('type') as keyof typeof REMINDERS || 'water';
+const type = params.get('type') as keyof typeof REMINDERS;
 
 // 3. Update the UI
 const data = REMINDERS[type];
@@ -32,5 +27,7 @@ if (titleEl && msgEl) {
   titleEl.style.color = data.color;
   msgEl.innerText = data.body;
 }
+
+document.getElementById('dismiss').addEventListener('click', () => {window.hh.dismiss();})
 
 console.log(`Rendered reminder: ${type}`);
